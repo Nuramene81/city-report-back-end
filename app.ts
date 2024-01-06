@@ -7,8 +7,10 @@ const app = express();
 const port = 3000;
 
 app.use(cors({
-  origin: 'http://localhost:4200' // restrict calls to those this address
+  origin: 'http://localhost:4200'
 }));
+app.use(express.urlencoded({ extended: true}));
+app.use(express.json());
 
 const pool = new Pool();
 pool.testPrimaryDBConection();
