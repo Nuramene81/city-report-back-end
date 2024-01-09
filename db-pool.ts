@@ -1,4 +1,5 @@
 import pg from 'pg';
+import { DB_CONFIG_OPTIONS } from './constants';
 
 export class Pool {
   _pool: pg.Pool | null = null;
@@ -12,18 +13,12 @@ export class Pool {
     this._pool?.end();
   }
 
-  async query(sql: string, params: Array<string | number>): Promise<pg.QueryResult> {
+  async query(sql: string, params: Array<string | number>): Promise<any> {
     return this._pool!.query(sql, params);
   }
 
   async testPrimaryDBConection(): Promise<void> {
-    this.connect({
-      host: 'localhost',
-      port: 5433,
-      database: 'city-report',
-      user: 'postgres',
-      password: '1504'
-    }).then(() => {
+    this.connect(DB_CONFIG_OPTIONS).then(() => {
       console.log('Connected to the database');
     }).catch((err) => {
       console.log('Cannot connect to the database', err);
