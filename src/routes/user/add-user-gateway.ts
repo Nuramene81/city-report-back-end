@@ -30,15 +30,14 @@ export class AddUserGateway {
   public async Add(user: User) {
     await this.pool.query(
       `INSERT INTO "Users" (
-        "FullName", "Username", "Email", "Password", "ProfileImageURL"
+        "FullName", "Username", "Email", "Password"
       )
         VALUES ($1, $2, $3, $4, $5);`, 
       [
         user.fullName, 
         user.username, 
         user.email, 
-        await this.hashPassword(user.password),
-        user.profileImageURL
+        await this.hashPassword(user.password)
       ]
     );
   }

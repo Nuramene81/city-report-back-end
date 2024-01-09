@@ -24,7 +24,6 @@ function makeRequestIntoUserRequest(req: Request): User {
     fullName: req.body.fullName,
     username: req.body.username,
     email: req.body.email,
-    password: req.body.password,
-    profileImageURL: req.body.profileImageURL
+    password: req.body.password
   };
 }
