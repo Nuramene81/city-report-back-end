@@ -24,13 +24,13 @@ export class AddUserTransaction {
   }
 
   private async validateEmail() {
-    if (await this.gateway.IsExistingEmail(this.addUserRequest.email)) {
+    if (await this.gateway.IsExistingEmail(this.addUserRequest.email as string)) {
       throw new Error(EMAIL_ERROR);
     }
   }
   
   private async validateUsername() {
-    if (await this.gateway.IsExistingUsername(this.addUserRequest.username)) {
+    if (await this.gateway.IsExistingUsername(this.addUserRequest.username as string)) {
       throw new Error(USERNAME_ERROR);
     }
   }

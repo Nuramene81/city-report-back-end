@@ -34,10 +34,10 @@ export class AddUserGateway {
       )
         VALUES ($1, $2, $3, $4, $5);`, 
       [
-        user.fullName, 
-        user.username, 
-        user.email, 
-        await this.hashPassword(user.password)
+        user.fullName as string, 
+        user.username as string, 
+        user.email as string, 
+        await this.hashPassword(user.password as string) 
       ]
     );
   }
