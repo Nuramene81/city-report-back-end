@@ -21,7 +21,7 @@ export async function loginHandler(req: Request, res: Response) {
     res.status(200).json({message: 'Login Successful!'});
     return;
   } else {
-    res.status(400).json({ message: 'Incorrect login details' });
+    res.status(200).json({ message: 'Incorrect login details' });
     return;
   }
 }
