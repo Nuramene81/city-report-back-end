@@ -1,11 +1,11 @@
 import express from 'express';
 import cors from 'cors';
+import pgSession from 'connect-pg-simple';
+import session from 'express-session';
+import pg from 'pg';
 import { Pool } from './db-pool';
 import { userRoutes } from './src/routes/user/userRoutes';
 import { loginRoutes } from './src/routes/login/loginRoutes';
-import session from 'express-session';
-import pgSession from 'connect-pg-simple';
-import pg from 'pg';
 import { DB_CONFIG_OPTIONS } from './constants';
 
 const app = express();
