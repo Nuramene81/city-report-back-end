@@ -2,11 +2,17 @@ import { Request, Response } from 'express';
 import { AddUserTransaction } from './add-user-transaction';
 import { AddUserGateway } from './add-user-gateway';
 import { User } from './models/user';
+declare module 'express-session' {
+  interface Session {
+    userUUID: string;
+  }
+}
 
 export async function addUserHandler(req: Request, res: Response) {
   const transaction = new AddUserTransaction(new AddUserGateway());
   try {
-    await transaction.Add(makeRequestIntoUserRequest(req));
+    const response: User = await transaction.Add(makeRequestIntoUserRequest(req));
+    req.session.userUUID = response.userUUID as string;
     res.status(201).json({ message: 'User created' });
   } catch (err) {
     if (err instanceof Error) {

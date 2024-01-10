@@ -12,10 +12,10 @@ export class AddUserTransaction {
     private gateway: AddUserGateway
   ) {}
 
-  public async Add(userRequest: User) {
+  public async Add(userRequest: User): Promise<User> {
     this.addUserRequest = userRequest;
     await this.validateRequest();
-    await this.gateway.Add(this.addUserRequest);
+    return await this.gateway.Add(this.addUserRequest);
   }
 
   private async validateRequest() {

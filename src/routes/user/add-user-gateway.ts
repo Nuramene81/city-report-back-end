@@ -27,12 +27,12 @@ export class AddUserGateway {
     return result.rowCount > 0;
   }
 
-  public async Add(user: User) {
-    await this.pool.query(
+  public async Add(user: User): Promise<User> {
+    const data = await this.pool.query(
       `INSERT INTO "Users" (
         "FullName", "Username", "Email", "Password"
       )
-        VALUES ($1, $2, $3, $4, $5);`, 
+        VALUES ($1, $2, $3, $4, $5) RETURNING "ID";`, 
       [
         user.fullName as string, 
         user.username as string, 
@@ -40,6 +40,10 @@ export class AddUserGateway {
         await this.hashPassword(user.password as string) 
       ]
     );
+
+    return new User(
+      data.rows[0].ID
+    )
   }
 
   private async hashPassword(password: string) {
