@@ -6,6 +6,7 @@ import pg from 'pg';
 import { Pool } from './db-pool';
 import { userRoutes } from './src/routes/user/userRoutes';
 import { loginRoutes } from './src/routes/login/loginRoutes';
+import { authRoutes } from './src/routes/auth/authRoutes';
 import { DB_CONFIG_OPTIONS } from './constants';
 
 const app = express();
@@ -36,6 +37,7 @@ app.use(session({
 }));
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
+app.use('/auth', authRoutes);
 app.use('/login', loginRoutes);
 app.use('/user', userRoutes);
 
