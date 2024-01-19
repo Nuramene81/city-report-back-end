@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import { AddIssueGateway } from './add-issue-gateway';
 import { AddIssueTransaction } from './add-issue-transaction';
 import { Issue } from '../models/issue';
-// import { IssueImage } from '../models/issue-image';
 import { User } from '../../user/models/user';
 declare module 'express-session' {
   interface Session {
