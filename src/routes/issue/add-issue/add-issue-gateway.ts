@@ -11,10 +11,22 @@ export class AddIssueGateway {
     this.pool.connect(DB_CONFIG_OPTIONS);
   }
 
-  public async AddIssue(issue: Issue): Promise<Issue> {
+  public async IsExistingUser(userUUID: string): Promise<boolean> {
+    const data = await this.pool.query(
+      `SELECT * FROM "Users" 
+        WHERE "ID" = $1;`,
+      [
+        userUUID
+      ]
+    );
+
+    return data.rowCount > 0;
+  }
+
+  public async AddIssue(issue: Issue): Promise<string> {
     const data = await this.pool.query(
       `INSERT INTO "Issues" (
-        "Title", "ReportByUserUUID", "Description", "Area", "Geolocation",
+        "Title", "ReportedByUserUUID", "Description", "Area", "Geolocation",
         "DateReported", "Status"
       )
         VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "ID";`, 
@@ -29,9 +41,8 @@ export class AddIssueGateway {
       ]
     );
 
-    return new Issue(
-      data.rows[0].ID
-    )
+    return data.rows[0].ID
+   
   }
   
   public async AddIssueImage(issueImage: IssueImage): Promise<void> {
