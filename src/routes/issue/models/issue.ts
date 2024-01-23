@@ -1,5 +1,4 @@
 import { User } from "../../user/models/user";
-import { IssueImage } from "./issue-image";
 
 export class Issue {
   constructor(
@@ -11,6 +10,6 @@ export class Issue {
     public geolocation?: string,
     public dateReported?: string,
     public status?: string,
-    public issueImages?: IssueImage[]
+    public issueImages?: string[]
   ) {}
 }
