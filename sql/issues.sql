@@ -3,8 +3,8 @@ CREATE TABLE "Issues" (
   "Title" VARCHAR(50),
   "ReportedByUserUUID" UUID NOT NULL,
   "Description" TEXT,
-  "Area" VARCHAR(50),
-  "Geolocation" TEXT,
+  "IssueLatitude" DECIMAL(9,15),
+  "IssueLongitude" DECIMAL(9,15),
   "DateReported" DATE,
   "Status" VARCHAR(36),
   FOREIGN KEY ("ReportedByUserUUID") REFERENCES "Users" ("ID")

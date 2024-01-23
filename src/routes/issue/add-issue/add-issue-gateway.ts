@@ -26,7 +26,7 @@ export class AddIssueGateway {
   public async AddIssue(issue: Issue): Promise<string> {
     const data = await this.pool.query(
       `INSERT INTO "Issues" (
-        "Title", "ReportedByUserUUID", "Description", "Area", "Geolocation",
+        "Title", "ReportedByUserUUID", "Description", "IssueLatitude", "IssueLongitude",
         "DateReported", "Status"
       )
         VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "ID";`, 
@@ -34,10 +34,10 @@ export class AddIssueGateway {
         issue.title as string, 
         issue.reportedBy?.userUUID as string, 
         issue.description as string, 
-        issue.area as string, 
-        issue.geolocation as string, 
-        issue.dateReported as string, 
-        issue.status as string
+        issue.issueLatitude as string,
+        issue.issueLongitude as string,
+        new Date().toISOString().slice(0, 10),
+        'Open'
       ]
     );
 

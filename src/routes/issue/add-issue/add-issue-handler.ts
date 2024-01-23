@@ -3,13 +3,20 @@ import { AddIssueGateway } from './add-issue-gateway';
 import { AddIssueTransaction } from './add-issue-transaction';
 import { Issue } from '../models/issue';
 import { User } from '../../user/models/user';
-import { cloudinaryObj as cloudinary } from '../../../../cloudinary';
+import {v2 as cloudinary} from 'cloudinary';
 import { v4 } from 'uuid';
 declare module 'express-session' {
   interface Session {
     userUUID: string;
   }
 }
+
+cloudinary.config({ 
+  secure: true,
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET
+});
 
 const imageURLs: string[] = [];
 
@@ -62,8 +69,8 @@ function makeRequestIntoIssueRequest(req: Request): Issue {
       req.session.userUUID
     ),
     req.body.description,
-    req.body.area,
-    req.body.geolocation,
+    req.body.latitude,
+    req.body.longitude,
     undefined,
     undefined,
     imageURLs,
