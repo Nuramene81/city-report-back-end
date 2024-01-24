@@ -5,7 +5,7 @@ CREATE TABLE "Issues" (
   "Description" TEXT,
   "IssueLatitude" DECIMAL(9,15),
   "IssueLongitude" DECIMAL(9,15),
-  "DateReported" DATE,
+  "DateReported" TIMESTAMP,
   "Status" VARCHAR(36),
   FOREIGN KEY ("ReportedByUserUUID") REFERENCES "Users" ("ID")
 );

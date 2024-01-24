@@ -36,7 +36,7 @@ export class AddIssueGateway {
         issue.description as string, 
         issue.issueLatitude as string,
         issue.issueLongitude as string,
-        new Date().toISOString().slice(0, 10),
+        new Date().toISOString(),
         'Open'
       ]
     );

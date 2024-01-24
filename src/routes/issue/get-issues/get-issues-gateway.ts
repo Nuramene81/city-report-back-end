@@ -13,7 +13,8 @@ export class GetIssuesGateway {
 
   public async GetIssues(): Promise<Issue[]> {
     const data = await this.pool.query(
-      `SELECT * FROM "Issues";`, []
+      `SELECT * FROM "Issues" ORDER BY "DateReported" DESC;`, 
+      []
     );
 
     if (data.rows.length === 0) {
