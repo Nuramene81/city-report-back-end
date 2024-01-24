@@ -33,7 +33,7 @@ export class GetIssuesGateway {
         row.Description,
         row.IssueLatitude,
         row.IssueLongitude,
-        row.DateReported,
+        new Date(row.DateReported).toISOString().split('T')[0],
         row.Status,
         await this.getIssueImages(row.ID)
       ));

@@ -49,6 +49,7 @@ export async function addIssueHandler(req: Request, res: Response) {
     }
     
     await transaction.Add(makeRequestIntoIssueRequest(req));
+    imageURLs.length = 0;
     res.status(201).json({ message: 'Issue created' });
   } catch (err) {
     if (err instanceof Error) {
