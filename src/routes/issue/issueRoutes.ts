@@ -10,11 +10,11 @@ const router = express.Router();
 const upload = multer();
 router.route('/')
   .post(upload.array('images'), addIssueHandler)
-  .get(getIssuesHandler)
-  .put(editIssueHandler);
+  .get(getIssuesHandler);
 
 router.route('/:issueUUID')
-  .delete(deleteIssueHandler);
+  .delete(deleteIssueHandler)
+  .put(editIssueHandler);
 
 const issueRoutes = router;
 export{ issueRoutes as issueRoutes };

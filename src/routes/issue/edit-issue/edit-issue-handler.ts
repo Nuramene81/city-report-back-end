@@ -27,7 +27,7 @@ export async function editIssueHandler(req: Request, res: Response) {
 
 function makeRequestIntoIssueRequest(req: Request): Issue {
   const request =  new Issue(
-    req.body.issueUUID,
+    req.params.issueUUID,
     req.body.title,
     new User(
       req.session.userUUID
