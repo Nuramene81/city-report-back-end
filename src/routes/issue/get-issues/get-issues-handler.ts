@@ -5,7 +5,7 @@ import { GetIssuesTransaction } from './get-issues-transaction';
 export async function getIssuesHandler(req: Request, res: Response) {
   const transaction = new GetIssuesTransaction(new GetIssuesGateway());
   try {
-    const response = await transaction.Get();
+    const response = await transaction.Get(req.query.search as string);
     res.status(201).json(response);
   } catch (err) {
     if (err instanceof Error) {

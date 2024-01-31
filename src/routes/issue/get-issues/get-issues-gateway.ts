@@ -6,14 +6,25 @@ import { User } from '../../user/models/user';
 export class GetIssuesGateway {
 
   private pool = new Pool();
+  private sqlString = '';
 
   constructor() {
     this.pool.connect(DB_CONFIG_OPTIONS);
   }
 
-  public async GetIssues(): Promise<Issue[]> {
+  public async GetIssues(searchString?: string): Promise<Issue[]> {
+    if (searchString) {
+      this.sqlString = `
+      SELECT * FROM "Issues" 
+        WHERE "Title" ILIKE '%${searchString}%' 
+        OR "Description" ILIKE '%${searchString}%' 
+        ORDER BY "DateReported" DESC;`;
+      
+    } else {
+      this.sqlString = `SELECT * FROM "Issues" ORDER BY "DateReported" DESC;`;
+    }
     const data = await this.pool.query(
-      `SELECT * FROM "Issues" ORDER BY "DateReported" DESC;`, 
+      this.sqlString, 
       []
     );
 

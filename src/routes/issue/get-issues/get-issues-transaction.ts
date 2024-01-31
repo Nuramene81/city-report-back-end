@@ -7,8 +7,8 @@ export class GetIssuesTransaction {
     private gateway: GetIssuesGateway
   ) {}
 
-  public async Get(): Promise<Issue[]> {
-    const issues = await this.gateway.GetIssues();
+  public async Get(searchString?: string): Promise<Issue[]> {
+    const issues = await this.gateway.GetIssues(searchString);
 
     return issues;
   }
