@@ -33,8 +33,8 @@ function makeRequestIntoIssueRequest(req: Request): Issue {
       req.session.userUUID
     ),
     req.body.description,
-    req.body.latitude,
-    req.body.longitude
+    req.body.issueLatitude,
+    req.body.issueLongitude
   );
   return request;
 }
