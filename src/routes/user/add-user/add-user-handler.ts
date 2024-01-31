@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { AddUserTransaction } from './add-user-transaction';
 import { AddUserGateway } from './add-user-gateway';
-import { User } from './models/user';
+import { User } from '../models/user';
 declare module 'express-session' {
   interface Session {
     userUUID: string;

@@ -1,6 +1,6 @@
-import { Pool } from '../../../db-pool';
-import { DB_CONFIG_OPTIONS } from '../../../constants';
-import { User } from './models/user';
+import { Pool } from '../../../../db-pool';
+import { DB_CONFIG_OPTIONS } from '../../../../constants';
+import { User } from '../models/user';
 import bcrypt from 'bcrypt';
 
 export class AddUserGateway {
@@ -32,7 +32,7 @@ export class AddUserGateway {
       `INSERT INTO "Users" (
         "FullName", "Username", "Email", "Password"
       )
-        VALUES ($1, $2, $3, $4, $5) RETURNING "ID";`, 
+        VALUES ($1, $2, $3, $4) RETURNING "ID";`, 
       [
         user.fullName as string, 
         user.username as string, 

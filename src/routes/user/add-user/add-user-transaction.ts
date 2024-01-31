@@ -1,4 +1,4 @@
-import { User } from './models/user';
+import { User } from '../models/user';
 import { AddUserGateway } from './add-user-gateway';
 
 const USERNAME_ERROR = 'Username already exists';
