@@ -1,7 +1,7 @@
 export const DB_CONFIG_OPTIONS = {
-  host: 'localhost',
-  port: 5433,
-  database: 'city-report',
-  user: 'postgres',
-  password: '1504'
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  database: process.env.DB_DATABASE_NAME,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD
 }
