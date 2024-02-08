@@ -15,11 +15,11 @@ import { issueRoutes } from './src/routes/issue/issueRoutes';
 import { DB_CONFIG_OPTIONS } from './constants';
 
 const app = express();
-const port = 3000;
+const port = process.env.HOST_PORT;
 const pgStore = pgSession(session);
 
 app.use(cors({
-  origin: 'http://localhost:4200',
+  origin: process.env.CORS_ORIGIN,
   credentials: true
 }));
 const pool = new Pool();
