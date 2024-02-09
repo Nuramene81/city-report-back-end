@@ -9,6 +9,7 @@ declare module 'express-session' {
 }
 
 export async function getCurrentUserHandler(req: Request, res: Response) {
+  console.log('session:', req.session);
   const userUUID = req.session.userUUID;
   console.log('received userUUID:', userUUID);
   const pool = new Pool();
