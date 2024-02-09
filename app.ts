@@ -19,7 +19,7 @@ const port = process.env.PORT || process.env.HOST_PORT;
 const pgStore = pgSession(session);
 
 app.use(cors({
-  origin: process.env.CORS_ORIGIN,
+  origin: true,
   credentials: true
 }));
 const pool = new Pool();
