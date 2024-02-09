@@ -10,6 +10,7 @@ declare module 'express-session' {
 
 export async function getCurrentUserHandler(req: Request, res: Response) {
   const userUUID = req.session.userUUID;
+  console.log('received userUUID:', userUUID);
   const pool = new Pool();
   pool.connect(DB_CONFIG_OPTIONS);
   const data = await pool.query(
