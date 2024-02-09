@@ -17,7 +17,7 @@ const authRoutes_1 = require("./src/routes/auth/authRoutes");
 const issueRoutes_1 = require("./src/routes/issue/issueRoutes");
 const constants_1 = require("./constants");
 const app = (0, express_1.default)();
-const port = process.env.PORT || process.env.HOST_PORT;
+const port = process.env.PORT || 3000;
 const pgStore = (0, connect_pg_simple_1.default)(express_session_1.default);
 app.use((0, cors_1.default)({
     origin: true,
@@ -32,13 +32,12 @@ app.use((0, express_session_1.default)({
         createTableIfMissing: true,
         tableName: 'user_sessions'
     }),
-    secret: process.env.SESSION_SECRET,
+    secret: 'thisismysecret',
     resave: false,
     saveUninitialized: false,
     cookie: {
-        httpOnly: true,
-        secure: true,
-        maxAge: 1000 * 60 * 60 * 24 * 7
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 7
     }
 }));
 app.use(express_1.default.urlencoded({ extended: true }));

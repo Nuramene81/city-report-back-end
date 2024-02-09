@@ -25,7 +25,10 @@ export async function loginHandler(req: Request, res: Response) {
   const isVerified = await bcrypt.compare(password, hashedPassword);
   if (isVerified) {
     req.session.userUUID = data.rows[0].ID;
-    res.status(200).json({ message: 'Login Successful!' });
+    res.status(200).json({ 
+      message: 'Login Successful!',
+      userUUID: data.rows[0].ID
+    });
     return;
   } else {
     res.status(200).json({ message: 'Incorrect login details' });

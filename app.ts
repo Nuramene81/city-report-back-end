@@ -49,5 +49,5 @@ app.use('/user', userRoutes);
 app.use('/issue', issueRoutes);
 
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running on port:${port}`);
 });

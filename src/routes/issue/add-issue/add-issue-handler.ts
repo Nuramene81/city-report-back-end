@@ -33,7 +33,6 @@ export async function addIssueHandler(req: Request, res: Response) {
           }, (err: any, result: any) => {
             if (err) {
               console.log('error uploading to cloudinary');
-              console.log(err);
               reject(err);
             } else {
               console.log('uploaded to cloudinary');
@@ -43,7 +42,6 @@ export async function addIssueHandler(req: Request, res: Response) {
         }).then((result) => {
           return result;
         });
-        console.log(result);
         imageURLs.push(result.secure_url);
       };
     }
@@ -67,7 +65,7 @@ function makeRequestIntoIssueRequest(req: Request): Issue {
     undefined,
     req.body.title,
     new User(
-      req.session.userUUID
+      req.body.userUUID
     ),
     req.body.description,
     req.body.latitude,
