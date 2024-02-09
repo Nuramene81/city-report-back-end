@@ -15,7 +15,7 @@ import { issueRoutes } from './src/routes/issue/issueRoutes';
 import { DB_CONFIG_OPTIONS } from './constants';
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const pgStore = pgSession(session);
 
 app.use(cors({
