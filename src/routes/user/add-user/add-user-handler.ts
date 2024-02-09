@@ -13,7 +13,10 @@ export async function addUserHandler(req: Request, res: Response) {
   try {
     const response: User = await transaction.Add(makeRequestIntoUserRequest(req));
     req.session.userUUID = response.userUUID as string;
-    res.status(201).json({ message: 'User created' });
+    res.status(201).json({ 
+      message: 'User created',
+      userUUID: response.userUUID
+    });
   } catch (err) {
     if (err instanceof Error) {
       res.status(400).json({ message: err.message });
