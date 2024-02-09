@@ -32,7 +32,7 @@ app.use(session({
     createTableIfMissing: true,
     tableName: 'user_sessions'
   }),
-  secret: 'thisismysecret',
+  secret: process.env.SESSION_SECRET as string,
   resave: false,
   saveUninitialized: false,
   cookie: {
