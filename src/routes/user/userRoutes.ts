@@ -5,7 +5,7 @@ import { getCurrentUserHandler } from './get-current-user.ts/get-current-user';
 const router = express.Router();
 
 router.post('/', addUserHandler);
-router.get('/', getCurrentUserHandler);
+router.get('/:userUUID', getCurrentUserHandler);
 
 
 const userRoutes = router;
