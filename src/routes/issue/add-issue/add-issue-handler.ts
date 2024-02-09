@@ -67,7 +67,7 @@ function makeRequestIntoIssueRequest(req: Request): Issue {
     undefined,
     req.body.title,
     new User(
-      req.session.userUUID
+      req.body.userUUID
     ),
     req.body.description,
     req.body.latitude,
