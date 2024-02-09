@@ -32,12 +32,11 @@ app.use(session({
     createTableIfMissing: true,
     tableName: 'user_sessions'
   }),
-  secret: process.env.SESSION_SECRET as string,
+  secret: 'thisismysecret',
   resave: false,
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    secure: true,
     maxAge: 1000 * 60 * 60 * 24 * 7
   }
 }));
