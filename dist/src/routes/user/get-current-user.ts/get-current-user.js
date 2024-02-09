@@ -16,6 +16,7 @@ const user_1 = require("../../user/models/user");
 function getCurrentUserHandler(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const userUUID = req.session.userUUID;
+        console.log('userUUID received:', userUUID);
         const pool = new db_pool_1.Pool();
         pool.connect(constants_1.DB_CONFIG_OPTIONS);
         const data = yield pool.query('SELECT * FROM "Users" WHERE "ID" = $1', [userUUID]);
