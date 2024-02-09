@@ -37,8 +37,6 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    // secure: true,
-    // sameSite: 'none',
     maxAge: 1000 * 60 * 60 * 24 * 7
   }
 }));
@@ -50,5 +48,5 @@ app.use('/user', userRoutes);
 app.use('/issue', issueRoutes);
 
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running on port:${port}`);
 });
