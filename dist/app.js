@@ -37,6 +37,7 @@ app.use((0, express_session_1.default)({
     saveUninitialized: false,
     cookie: {
         httpOnly: true,
+        secure: true,
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
 }));
