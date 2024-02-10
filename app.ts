@@ -19,7 +19,7 @@ const port = 3000;
 const pgStore = pgSession(session);
 
 app.use(cors({
-  origin: 'http://localhost:4200',
+  origin: true,
   credentials: true
 }));
 const pool = new Pool();
