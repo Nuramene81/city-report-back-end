@@ -6,7 +6,7 @@ declare module 'express-session' {
 }
 
 export async function authHandler(req: Request, res: Response) {
-  if (req.session.userUUID) {
+  if (req.session) {
     res.status(200).json({ isLoggedIn: true });
   } else {
     res.status(200).json({ isLoggedIn: false });
