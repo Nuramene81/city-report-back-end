@@ -3,13 +3,8 @@ import { AddIssueGateway } from './add-issue-gateway';
 import { AddIssueTransaction } from './add-issue-transaction';
 import { Issue } from '../models/issue';
 import { User } from '../../user/models/user';
-import {v2 as cloudinary} from 'cloudinary';
+import { v2 as cloudinary } from 'cloudinary';
 import { v4 } from 'uuid';
-declare module 'express-session' {
-  interface Session {
-    userUUID: string;
-  }
-}
 
 cloudinary.config({ 
   secure: true,
@@ -43,7 +38,6 @@ export async function addIssueHandler(req: Request, res: Response) {
         }).then((result) => {
           return result;
         });
-        console.log(result);
         imageURLs.push(result.secure_url);
       };
     }

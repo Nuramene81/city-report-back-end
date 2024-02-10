@@ -2,11 +2,6 @@ import { Request, Response } from 'express';
 import { Pool } from '../../../db-pool';
 import { DB_CONFIG_OPTIONS } from '../../../constants';
 import bcrypt from 'bcrypt';
-declare module 'express-session' {
-  interface Session {
-    userUUID: string;
-  }
-}
 
 export async function loginHandler(req: Request, res: Response) {
   const { email, password } = req.body;
