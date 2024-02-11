@@ -25,7 +25,6 @@ export async function loginHandler(req: Request, res: Response) {
       process.env.JWT_SECRET as string,
       { expiresIn: '1d' }
     );
-    // req.session.userUUID = data.rows[0].ID;
     res.status(200).json({ 
       token,
       message: 'Login Successful!' 
