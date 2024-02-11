@@ -2,12 +2,6 @@ import { Request, Response } from 'express';
 import { EditIssueGateway } from './edit-issue-gateway';
 import { EditIssueTransaction } from './edit-issue-transaction';
 import { Issue } from '../models/issue';
-import { User } from '../../user/models/user';
-declare module 'express-session' {
-  interface Session {
-    userUUID: string;
-  }
-}
 
 export async function editIssueHandler(req: Request, res: Response) {
   const transaction = new EditIssueTransaction(new EditIssueGateway());
@@ -29,9 +23,7 @@ function makeRequestIntoIssueRequest(req: Request): Issue {
   const request =  new Issue(
     req.params.issueUUID,
     req.body.title,
-    new User(
-      req.session.userUUID
-    ),
+    undefined,
     req.body.description,
     req.body.issueLatitude,
     req.body.issueLongitude

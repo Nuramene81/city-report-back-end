@@ -3,13 +3,9 @@ import { AddIssueGateway } from './add-issue-gateway';
 import { AddIssueTransaction } from './add-issue-transaction';
 import { Issue } from '../models/issue';
 import { User } from '../../user/models/user';
-import {v2 as cloudinary} from 'cloudinary';
+import { v2 as cloudinary } from 'cloudinary';
 import { v4 } from 'uuid';
-declare module 'express-session' {
-  interface Session {
-    userUUID: string;
-  }
-}
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
 cloudinary.config({ 
   secure: true,
@@ -61,11 +57,24 @@ export async function addIssueHandler(req: Request, res: Response) {
 }
 
 function makeRequestIntoIssueRequest(req: Request): Issue {
-  const request =  new Issue(
+  const authHeader = req.headers.authorization;
+  if (!authHeader || authHeader.split(' ')[0] !== 'Bearer') {
+    throw new Error('Invalid or missing token');
+  }
+
+  const token = authHeader.split(' ')[1];
+  let decodedToken;
+  try {
+    decodedToken = jwt.verify(token, process.env.JWT_SECRET as string);
+  } catch (err) {
+    throw new Error('Invalid token');
+  }
+
+  const request = new Issue(
     undefined,
     req.body.title,
     new User(
-      req.body.userUUID
+      (decodedToken as JwtPayload).userUUID as string,
     ),
     req.body.description,
     req.body.latitude,
@@ -74,5 +83,6 @@ function makeRequestIntoIssueRequest(req: Request): Issue {
     undefined,
     imageURLs,
   );
+
   return request;
 }
