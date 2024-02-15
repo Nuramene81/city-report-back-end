@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { Pool } from '../../../db-pool';
 import { DB_CONFIG_OPTIONS } from '../../../constants';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import { createJWTToken } from '../../../helper-functions';
 
 export async function loginHandler(req: Request, res: Response) {
   const { email, password } = req.body;
@@ -20,11 +20,7 @@ export async function loginHandler(req: Request, res: Response) {
   const hashedPassword = data.rows[0].Password;
   const isVerified = await bcrypt.compare(password, hashedPassword);
   if (isVerified) {
-    const token = jwt.sign(
-      { userUUID: data.rows[0].ID },
-      process.env.JWT_SECRET as string,
-      { expiresIn: '1d' }
-    );
+    const token = createJWTToken(data.rows[0].ID);
     res.status(200).json({ 
       token,
       message: 'Login Successful!' 

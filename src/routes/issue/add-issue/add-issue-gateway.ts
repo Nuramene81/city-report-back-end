@@ -19,7 +19,6 @@ export class AddIssueGateway {
         userUUID
       ]
     );
-
     return data.rowCount > 0;
   }
 
@@ -40,9 +39,7 @@ export class AddIssueGateway {
         'Open'
       ]
     );
-
     return data.rows[0].ID
-   
   }
   
   public async AddIssueImage(issueImage: IssueImage): Promise<void> {

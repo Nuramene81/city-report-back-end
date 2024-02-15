@@ -19,29 +19,7 @@ const imageURLs: string[] = [];
 export async function addIssueHandler(req: Request, res: Response) {
   const transaction = new AddIssueTransaction(new AddIssueGateway());
   try {
-    if (req.files){
-      for (const file of req.files as Express.Multer.File[]) {
-        const result: any = await new Promise((resolve, reject) => {
-          cloudinary.uploader.upload_stream({
-            resource_type: 'auto',
-            public_id: v4(),
-            buffer: file.buffer
-          }, (err: any, result: any) => {
-            if (err) {
-              console.log('error uploading to cloudinary');
-              reject(err);
-            } else {
-              console.log('uploaded to cloudinary');
-              resolve(result);
-            }
-          }).end(file.buffer);
-        }).then((result) => {
-          return result;
-        });
-        imageURLs.push(result.secure_url);
-      };
-    }
-    
+    await uploadImagesToCloudinary(req.files as Express.Multer.File[])
     await transaction.Add(makeRequestIntoIssueRequest(req));
     imageURLs.length = 0;
     res.status(201).json({ message: 'Issue created' });
@@ -85,4 +63,29 @@ function makeRequestIntoIssueRequest(req: Request): Issue {
   );
 
   return request;
+}
+
+async function uploadImagesToCloudinary(files: Express.Multer.File[]): Promise<void>{
+  if (files){
+    for (const file of files as Express.Multer.File[]) {
+      const result: any = await new Promise((resolve, reject) => {
+        cloudinary.uploader.upload_stream({
+          resource_type: 'auto',
+          public_id: v4(),
+          buffer: file.buffer
+        }, (err: any, result: any) => {
+          if (err) {
+            console.log('error uploading to cloudinary');
+            reject(err);
+          } else {
+            console.log('uploaded to cloudinary');
+            resolve(result);
+          }
+        }).end(file.buffer);
+      }).then((result) => {
+        return result;
+      });
+      imageURLs.push(result.secure_url);
+    };
+  }
 }

@@ -4,8 +4,9 @@ import { getCurrentUserHandler } from './get-current-user.ts/get-current-user';
 
 const router = express.Router();
 
-router.post('/', addUserHandler);
-router.get('/', getCurrentUserHandler);
+router.route('/')
+  .post(addUserHandler)
+  .get(getCurrentUserHandler)
 
 
 const userRoutes = router;
