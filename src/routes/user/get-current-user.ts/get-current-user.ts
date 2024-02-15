@@ -5,7 +5,6 @@ import { User } from '../../user/models/user';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
 export async function getCurrentUserHandler(req: Request, res: Response) {
-  // const userUUID = req.session.userUUID;
   const authHeader = req.headers.authorization;
   if (!authHeader || authHeader.split(' ')[0] !== 'Bearer') {
     throw new Error('Invalid or missing token');
